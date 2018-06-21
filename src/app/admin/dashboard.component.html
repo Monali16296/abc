@@ -1,0 +1,141 @@
+<div class="container ">
+
+    <h3 align="center">
+        <b> Dashboard</b>
+    </h3>
+    <hr/>
+
+
+    <div class="row">
+        <form>
+            <div class="col-md-4">
+                <input class="form-control" placeholder="Search by First Name,Last Name or Email" type="text"
+                       [(ngModel)]="aa" #search1="ngModel" name="abc">
+            </div>
+            <div class="col-md-8">
+                <button (click)="search(search1)" class="btn btn-primary"><i class="fa fa-search"></i>Search
+                </button>
+                <button (click)="ngOnInit()" type="reset" class="btn btn-default refresh"><i
+                        class="fa fa-refresh"></i>Reset
+                </button>
+            </div>
+        </form>
+
+    </div>
+    <br>
+
+    <div class="panel-header clearfix">
+
+        <span><img src="http://localhost/ng4tutorial/src/assets/active.png">&nbsp;Active&nbsp;&nbsp;&nbsp;<img
+                src="http://localhost/ng4tutorial/src/assets/inactive.png">&nbsp;Inactive</span>
+        <a class="add-link" routerLink="/add" routerLinkActive="active">Add User</a>
+    </div>
+    <br>
+
+    <div class="content">
+        <div class="table-responsive" *ngIf="allItems">
+            <table class="table table-bordered">
+                <thead>
+                <tr class="table-header" *ngIf="allItems">
+                    <th><input type="checkbox" [checked]="box2" (click)="toggleCheckBox(pagedItems,$event)"></th>
+                    <th class="t-center">Sr.No</th>
+                    <th><a class="wht-fnt" (click)="sorting(sort_by='firstname')" title="Sort by First Name">First
+                        Name<i
+                                *ngIf='sort_by=="firstname" && direction=="desc"' class="fa fa-chevron-down"></i><i
+                                *ngIf='sort_by=="firstname" && direction=="asc"' class="fa fa-chevron-up"></i></a></th>
+
+                    <th><a class="wht-fnt" (click)="sorting(sort_by='lastname')" title="Sort by Last Name">Last Name<i
+                            *ngIf='sort_by=="lastname" && direction=="desc"' class="fa fa-chevron-down"></i><i
+                            *ngIf='sort_by=="lastname" && direction=="asc"' class="fa fa-chevron-up"></i></a></th>
+                    <th><a class="wht-fnt" (click)="sorting(sort_by='email')" title="Sort by Email">Email<i
+                            *ngIf='sort_by=="email" && direction=="desc"' class="fa fa-chevron-down"></i><i
+                            *ngIf='sort_by=="email" && direction=="asc"' class="fa fa-chevron-up"></i></a></th>
+                    <th><a class="wht-fnt" (click)="sorting(sort_by='role_name')" title="Sort by Role">Role<i
+                            *ngIf='sort_by=="role_name" && direction=="desc"' class="fa fa-chevron-down"></i><i
+                            *ngIf='sort_by=="role_name" && direction=="asc"' class="fa fa-chevron-up"></i></a></th>
+                    <th class="t-center"><a class="wht-fnt" (click)="sorting(sort_by='status')">Status<i
+                            *ngIf='sort_by=="status" && direction=="desc"' class="fa fa-chevron-down"></i><i
+                            *ngIf='sort_by=="status" && direction=="asc"' class="fa fa-chevron-up"></i></a></th>
+                    <th class="t-center">Actions</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="allItems">
+                <tr *ngFor="let students of pagedItems ;let i=index " class="data">
+                    <td><input class="ckbox" *ngIf="students.role_id!=1" #cb [checked]="checkBox" name="ab"
+                               type="checkbox" [(ngModel)]="students.remove" (change)="search_box(students, $event)"
+                               value="{{students.id}}"/></td>
+
+                    <td class="t-center">{{pageSize * (currentPage-1)+i+1}}</td>
+                    <td>{{students.firstname}}</td>
+                    <td>{{students.lastname}}</td>
+                    <td>{{students.email}}</td>
+                    <td>{{students.role_name}}</td>
+                    <td class="t-center" *ngIf="students.status==0"><img
+                            src="http://localhost/ng4tutorial/src/assets/inactive.png"></td>
+                    <td class="t-center" *ngIf="students.status==1"><img
+                            src="http://localhost/ng4tutorial/src/assets/active.png"></td>
+                    <td class="t-center">
+                        <a class="ckbox" (click)="view_user(students.id);" title="View User"><i
+                                class="fa fa-eye"></i></a>
+
+                        <a class="ckbox" (click)="edit_user(students.id);" title="Edit User"><i
+                                class="fa fa-pencil"></i></a>
+                        <a class="ckbox" *ngIf="students.role_id!=1" (click)="delete_user(students.id);"
+                           title="Delete User"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+
+                </tbody>
+
+            </table>
+        </div>
+
+        <div class="btn-panel mb15" *ngIf="allItems">
+            <button class="btn btn-labeled btn-danger" (click)="delete_records(selectedItems)"><span
+                    class="btn-label"><i
+                    class="fa fa-trash-o"></i></span>Delete
+            </button>
+
+            <button class="btn btn-labeled btn-info" (click)="active_records(selectedItems)"><span class="btn-label"><i
+                    class="fa fa-plus-square-o"></i></span>Active
+            </button>
+
+            <button class="btn btn-labeled btn-danger" (click)="inactive_records(selectedItems)"><span
+                    class="btn-label"><i
+                    class="fa fa-minus-square-o"></i></span>In Active
+            </button>
+
+            <button class="btn btn-labeled btn-info" (click)="active_all_records()"><span class="btn-label"><i
+                    class="fa fa-plus-square-o"></i></span>Active All
+            </button>
+
+            <button class="btn btn-labeled btn-danger" (click)="inactive_all_records()"><span class="btn-label"><i
+                    class="fa fa-minus-square-o"></i></span>Inactive All
+            </button>
+        </div>
+    </div>
+    <ul *ngIf="pager.pages && pager.pages.length && allItems" class="pagination ckbox">
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(1)">First</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === 1}">
+            <a (click)="setPage(pager.currentPage - 1)">Previous</a>
+        </li>
+        <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+            <a (click)="setPage(page)">{{page}}</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.currentPage + 1)">Next</a>
+        </li>
+        <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}">
+            <a (click)="setPage(pager.totalPages)">Last</a>
+        </li>
+    </ul>
+
+    <div class="row" *ngIf="!allItems">
+        <div class="col-sm-12"
+             style="background-color: white; padding-bottom: 0px;margin-bottom: 15px;padding-top: 0px;">No Record(s)
+            Found
+        </div>
+    </div>
+</div>

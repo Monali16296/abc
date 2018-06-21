@@ -1,0 +1,46 @@
+.navbar-default .navbar-nav > li > a:hover {
+    color: red;
+}
+
+.navbar-default .navbar-nav > li > a {
+    color: white;
+}
+.navbar-default .navbar-nav > li > a.user {
+    color: #36d1ff;
+}
+
+.navbar-default .navbar-nav > li > a.logout {
+    color: red;
+}
+nav {
+    background-color: #292d35;
+}
+
+nav a:link, a:visited {
+    color: #607D8B;
+}
+
+nav a:hover {
+    color: #039be5;
+    background-color: #CFD8DC;
+}
+nav option:hover {
+
+}
+
+nav a.active {
+    color: #039be5;
+}
+
+.navbar-default .navbar-nav > li > a.active {
+    color: white;
+    background-color: blue;
+}
+.img{
+    height: 35px;
+    width: 85px;
+}
+.copyright{
+    color: white;
+    padding-top: 15px;
+}

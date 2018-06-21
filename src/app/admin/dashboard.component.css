@@ -1,0 +1,58 @@
+.data:hover{
+    background-color: #eee;
+}
+.t-center {
+    text-align: center;
+}
+
+.table-header a {
+    color: white;
+}
+
+.table-header {
+    color: white;
+    background-color: #336490;
+}
+
+a.wht-fnt {
+
+    text-decoration: none;
+    cursor: pointer;
+
+}
+
+a.add-link {
+    float: right;
+}
+
+.content {
+    background-color: white;
+}
+
+.fa-eye, .fa-pencil, .fa-trash-o {
+    color: #333;
+}
+
+.mb15 {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+
+}
+
+.btn-panel .btn i {
+    color: #fff;
+}
+
+.btn-panel .btn span {
+    padding-right: 7px;
+}
+.ckbox{
+    cursor: pointer;
+}
+.refresh{
+    background-color: #e6e6e6;
+    border-color: #a6a6a6;
+}
+.add-link{
+    float: right;
+}

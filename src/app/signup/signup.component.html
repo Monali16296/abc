@@ -1,0 +1,175 @@
+<div class="container" >
+
+    <h3 align="center">
+       <b> Sign Up/Log in</b>
+    </h3>
+    <hr/>
+
+    <div class="row" >
+        <div class="col-sm-6">
+
+            <form  #ff="ngForm"  class="form-horizontal form" name="myForm" method="post">
+                <br>
+
+                <h4 align="center">
+                    Log in
+                </h4>
+                <div align="right" class="required">*Fields are mandatory</div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Email<span class="star">*</span></label>
+
+
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control"  [(ngModel)]="email2" #logemail="ngModel"
+                               placeholder="Email" name="log_email" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$" required>
+                        <div class="required" *ngIf="!logemail.valid && logemail.dirty">
+                            <div *ngIf="logemail.errors && logemail.errors.required">
+                                Email is required
+                            </div>
+                            <div *ngIf="logemail.errors && logemail.errors.pattern">
+                                Email is invalid
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label  class="col-sm-3 control-label">Password<span class="star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" name="password3" placeholder="Password"
+                               [ngModel]="password"
+                               required  #logpassword="ngModel"
+                               pattern="^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$&]).*$" minlength="8">
+
+                        <div class="required" *ngIf="!logpassword.valid && logpassword.dirty">
+                            <div *ngIf="logpassword.errors && logpassword.errors.required">
+                                password is required
+                            </div>
+                            <div *ngIf="logpassword.errors && logpassword.errors.pattern">
+                                password must contain at least 8 characters.(1 uppercase 1 lowercase 1 digit 1 special
+                                symbol(@/#/$/&))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+                        <button (click)="check(logemail.value,logpassword.value);" class="btn  button2" [disabled]="!ff.form.valid">Log in</button>
+                    </div>
+                </div>
+                <div align="right"><a routerLink="/forgot_password" routerLinkActive="active"><u>Forgot Password</u></a></div>
+            </form>
+        </div>
+        <div class="col-sm-6">
+            <form #f="ngForm" (ngSubmit)="add(f)" class="form-horizontal form" ><br>
+                <h4 align="center">
+                    Sign Up
+                </h4>
+
+                <div align="right" class="required">*Fields are mandatory</div>
+                <div class="form-group">
+                    <label  class="col-sm-3 control-label">First Name<span
+                            class="star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control"  [(ngModel)]="name" #firstname="ngModel"
+                               placeholder="First Name" name="fname" required>
+
+                        <div class="required" *ngIf="firstname.dirty && !firstname.valid">
+                            <div *ngIf=" firstname.errors.required">
+                                Firstname is required
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <label  class="col-sm-3 control-label">Last Name<span class="star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control"  [(ngModel)]="lname" #lastname="ngModel"
+                               placeholder="Last Name" name="lname" required>
+
+                        <div class="required" *ngIf="!lastname.valid && lastname.dirty">
+                            <div *ngIf="lastname.errors && lastname.errors.required">
+                                Lastname is required
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-3 control-label">Email<span class="star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$"
+                               [(ngModel)]="user_email" #email="ngModel" placeholder="Email"
+                               name="email" required>
+
+                        <div class="required" *ngIf="!email.valid && email.dirty">
+                            <div *ngIf="email.errors && email.errors.required">
+                                Email is required
+                            </div>
+                            <div *ngIf="email.errors && email.errors.pattern">
+                                Email is invalid
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Password<span class="star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" name="password3" placeholder="Password"
+                               [ngModel]="password"
+                               required validateEqual="confirmPassword3" reverse="true" #password2="ngModel"
+                               pattern="^.*(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$&]).*$" minlength="8">
+
+                        <div class="required" *ngIf="!password2.valid && password2.dirty">
+                            <div *ngIf="password2.errors && password2.errors.required">
+                                password is required
+                            </div>
+                            <div *ngIf="password2.errors && password2.errors.pattern">
+                                password must contain at least 8 characters.(1 uppercase 1 lowercase 1 digit 1 special
+                                symbol(@/#/$/&))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Confirm Password<span class="star">*</span></label>
+
+                    <div class="col-sm-8">
+                        <input type="password" class="form-control" name="confirmPassword3"
+                               placeholder="Confirm Password" [ngModel]="confirmPassword"
+                               required validateEqual="password3" reverse="false" #con_password="ngModel">
+
+                        <div class="required" *ngIf="!con_password.valid  && con_password.dirty">
+                            Confirm password should be same as above
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-8">
+
+
+                        <button class="btn button3" [disabled]="!f.form.valid">Sign up</button>
+                        <button type="reset" class="btn  button4">Reset</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br><br>
+</div>
+
+
